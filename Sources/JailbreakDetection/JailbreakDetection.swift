@@ -2,17 +2,17 @@ import Foundation
 import UIKit
 
 public func isJailbroken() -> Bool {
-        print("Checking Device...")
+        print("[iOS - Jailbreak Detection]:\t Checking Device...")
         
         guard let cydiaUrlScheme = NSURL(string: "cydia://package/com.example.package") else { return false }
         if UIApplication.shared.canOpenURL(cydiaUrlScheme as URL) {
-            print("[Jailbreak Detection]:\tCydia URL scheme.")
+            print("[iOS - Jailbreak Detection]:\t Cydia URL scheme")
             return true
         }
         
         #if arch(i386) || arch(x86_64)
-            // This is a Simulator feature - might honestly remove this
-            print("[Jailbreak Detection]:\tSimulator detected.")
+            //MARK: This is a Simulator feature - might honestly remove this
+            print("[iOS - Jailbreak Detection]:\t Simulator detected")
             return true
         #endif
          
@@ -25,7 +25,7 @@ public func isJailbroken() -> Bool {
             fileManager.fileExists(atPath: "/etc/apt") ||
             fileManager.fileExists(atPath: "/usr/bin/ssh") ||
             fileManager.fileExists(atPath: "/private/var/lib/apt") {
-            print("[Jailbreak Detection]:\tUncommon file exists.")
+            print("[iOS - Jailbreak Detection]:\t Uncommon file exists")
             return true
         }
         
@@ -35,7 +35,7 @@ public func isJailbroken() -> Bool {
             canOpen(path: "/usr/sbin/sshd") ||
             canOpen(path: "/etc/apt") ||
             canOpen(path: "/usr/bin/ssh") {
-            print("[Jailbreak Detection]:\tCan open uncommon path.")
+            print("[iOS - Jailbreak Detection]:\t Can open uncommon path")
             return true
         }
         
@@ -43,12 +43,12 @@ public func isJailbroken() -> Bool {
         do {
             try "anyString".write(toFile: path, atomically: true, encoding: String.Encoding.utf8)
             try fileManager.removeItem(atPath: path)
-            print("[Jailbreak Detection]:\tCreate file in /private/.")
+            print("[iOS - Jailbreak Detection]:\t Create file in /private/")
             return true
         } catch {
             return false
-        }
     }
+}
     
 public func canOpen(path: String) -> Bool {
         let file = fopen(path, "r")
