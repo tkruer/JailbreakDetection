@@ -1,8 +1,7 @@
 import Foundation
 import UIKit
 
-
-public class JailbreakDetection {
+public struct JailbreakDetection {
 
     public func isJailbroken() -> Bool {
             
