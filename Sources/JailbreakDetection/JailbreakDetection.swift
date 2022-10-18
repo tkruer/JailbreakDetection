@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 
 public func isJailbroken() -> Bool {
+        print("Checking Device...")
         
         guard let cydiaUrlScheme = NSURL(string: "cydia://package/com.example.package") else { return false }
         if UIApplication.shared.canOpenURL(cydiaUrlScheme as URL) {
