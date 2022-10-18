@@ -2,12 +2,9 @@ import Foundation
 import UIKit
 
 
-public struct JailbreakDetection {
+public class JailbreakDetection {
 
-    public init() {
-    }
-    
-    func isJailbroken() -> Bool {
+    public func isJailbroken() -> Bool {
             
             guard let cydiaUrlScheme = NSURL(string: "cydia://package/com.example.package") else { return false }
             if UIApplication.shared.canOpenURL(cydiaUrlScheme as URL) {
@@ -55,11 +52,11 @@ public struct JailbreakDetection {
             }
         }
         
-    func canOpen(path: String) -> Bool {
+    public func canOpen(path: String) -> Bool {
             let file = fopen(path, "r")
             guard file != nil else { return false }
             fclose(file)
             return true
-        }
+    }
 }
 
